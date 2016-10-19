@@ -64,6 +64,27 @@ function getScaleFreeNetwork(nodeCount) {
       connectionCount[from]++;
       connectionCount[to]++;
     }
+
+    // else if (i > 1){
+
+    //   for(var j=0; j<nodeCount; j++){
+
+    //   		if(Math.floor(Math.random() * 100) < 25 && i!=j)  {
+
+	   //    		  var from = i;
+			 //      var to = j;
+			 //      edges.push({
+			 //        from: from,
+			 //        to: to
+			 //      });
+			 //      connectionCount[from]++;
+			 //      connectionCount[to]++;
+
+    //   		}
+ 
+
+    //   }
+    // }
   }
 
   return {nodes:nodes, edges:edges};

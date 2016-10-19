@@ -24,7 +24,16 @@
       var container = document.getElementById('mynetwork');
       var data = getScaleFreeNetwork(nodeCount);
       var options = {
-        physics: { stabilization: false }
+        physics: { stabilization: false },
+        manipulation: {
+    		addNode: function(nodeData,callback) {
+    			nodeData.id = nodeCount;
+      			nodeData.label = nodeCount;
+      			nodeCount++
+      			callback(nodeData);
+    		},
+    		deleteNode: true
+  		}
       };
       network = new vis.Network(container, data, options);
     }
@@ -39,4 +48,15 @@
       setSmooth = false;
       document.getElementById("message").innerHTML = '<a onclick="disableSmoothCurves()">You may want to disable dynamic smooth curves for better performance with a large amount of nodes and edges. Click here to disable them.</a>';
       network.setOptions({edges:{smooth:{type:'dynamic'}}});
+    }
+
+
+    function addNode(){
+
+
+    }
+
+     function removeNode(id){
+
+
     }
