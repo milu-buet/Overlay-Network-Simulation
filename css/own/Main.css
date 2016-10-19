@@ -1,0 +1,50 @@
+	
+
+	body {
+      font: 10pt sans;
+    }
+
+    #title_simulation{
+
+    	text-align: center;
+
+    }
+
+     #real-network-control {
+      width: 49%;
+      height: 130px;
+      border: 1px solid lightgray;
+      float: left;
+      padding-left: 8px;
+    }
+    
+    #overlay-network-control {
+      width: 49%;
+      height: 130px;
+      border: 1px solid lightgray;
+      float: right;
+      padding-left: 8px;
+    }
+
+
+    #mynetwork {
+      width: 49.5%;
+      height: 600px;
+      border: 1px solid lightgray;
+      float: left;
+    }
+
+    #ovelaynetwork {
+      width: 49.5%;
+      height: 600px;
+      border: 1px solid lightgray;
+      float: right;
+    }
+
+    #message {
+      color:darkred;
+      max-width:600px;
+      font-size:16px;
+      cursor:pointer;
+      text-decoration: underline;
+    }
