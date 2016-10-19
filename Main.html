@@ -1,15 +1,58 @@
-<!DOCTYPE html>
 
+<!doctype html>
 <html>
-	<head>
-			<title>Overlay Network Simulation</title>
-			<script type="text/javascript" src = 'js/thirdparty/jquery-3.1.1.js' ></script>
+<head>
+  <title>OverLay Network | Simulation</title>
 
-	</head>
-	<body>
+  <style type="text/css">
+    body {
+      font: 10pt sans;
+    }
+    #mynetwork {
+      width: 49%;
+      height: 600px;
+      border: 1px solid lightgray;
+      float: left;
+    }
 
-		hello
-	</body>
+    #ovelaynetwork {
+      width: 49%;
+      height: 600px;
+      border: 1px solid lightgray;
+      float: right;
+    }
 
+    #message {
+      color:darkred;
+      max-width:600px;
+      font-size:16px;
+      cursor:pointer;
+      text-decoration: underline;
+    }
+  </style>
 
+  <script type="text/javascript" src= 'js/own/Util.js'></script>
+  <script type="text/javascript" src = 'js/thirdparty/vis/dist/vis.min.js' ></script>
+  <link rel="stylesheet" type="text/css" href="js/thirdparty/vis/dist/vis.min.css">
+
+  <script type="text/javascript" src='js/own/CreateNetwork.js'> </script>
+
+</head>
+<body onload="draw();">
+<p>
+  Generate a random network with nodes and edges.
+</p>
+<p>
+  <form onsubmit="draw(); return false;">
+  <label for="nodeCount">Number of nodes:</label>
+  <input id="nodeCount" type="text" value="25" style="width: 50px;">
+  <input type="button" value="Go" onclick="draw()">
+</form>
+</p>
+<span id="message"></span>
+
+<div id="mynetwork"></div>
+<div id="ovelaynetwork"></div>
+
+</body>
 </html>
