@@ -23,20 +23,23 @@
       // create a network
       var container = document.getElementById('mynetwork');
       var data = getScaleFreeNetwork(nodeCount);
-      nodes = data.nodes
-      edges = data.edges
+      rnodes = nodes = data.nodes
+      redges = edges = data.edges
 
       var options = {
         physics: { stabilization: false },
         manipulation: {
-    		addNode: function(nodeData,callback) {
-    			nodeData.id = nodeCount;
-      			nodeData.label = nodeCount;
-      			nodeCount++
-      			callback(nodeData);
-    		},
-    		deleteNode: true
-  		}
+      		addNode: function(nodeData,callback) {
+      			  nodeData.id = nodeCount;
+        			nodeData.label = nodeCount;
+        			nodeCount++
+        			callback(nodeData);
+      		},
+      		deleteNode: true
+  		  },
+        groups: {
+            myGroup: {color:{background:'red'}, borderWidth:3}
+        }
       };
       network = new vis.Network(container, data, options);
     }

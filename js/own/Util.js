@@ -172,6 +172,8 @@ function getScaleFreeOverlayNetwork(nodeCount,superpeerCount) {
 
             });
 
+            rnodes.update([{id:sp[i], group:'myGroup'}]);
+
             connectionCount[sp[i]] = 0;
 
           // create edges in a scale-free-network way
