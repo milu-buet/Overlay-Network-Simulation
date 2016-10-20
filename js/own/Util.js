@@ -137,25 +137,47 @@ function getScaleFreeNetworkSeeded(nodeCount, seed) {
 
 
 
+function selectSuperPeers(nodeCount,superpeerCount){
 
-function getScaleFreeOverlayNetwork(nodeCount) {
+  var sp = []
+  for(var i=0;i<superpeerCount;i++){
+
+      var rand = Math.floor(Math.random() * nodeCount);
+
+      while(sp.indexOf(rand) >=0){
+        var rand = Math.floor(Math.random() * nodeCount);
+      }
+        sp.push(rand) 
+  }
+
+  return sp;
+}
+
+
+function getScaleFreeOverlayNetwork(nodeCount,superpeerCount) {
   var nodes = [];
   var edges = [];
   var connectionCount = [];
 
-  // randomly create some nodes and edges
-  for (var i = 0; i < nodeCount; i++) {
-    nodes.push({
-      id: i,
-      label: String(i)
-    });
+  var sp = selectSuperPeers(nodeCount,superpeerCount)
+  //console.log()
 
-    connectionCount[i] = 0;
+  for(i in sp){
+      
+      nodes.push({
+          id: sp[i],
+          label: String(sp[i]),
+          //color:{background:'#7CFC00'},
+          group:'myGroup'
+
+      });
+
+      connectionCount[sp[i]] = 0;
 
     // create edges in a scale-free-network way
     if (i == 1) {
-      var from = i;
-      var to = 0;
+      var from = sp[i];
+      var to = sp[0];
       edges.push({
         from: from,
         to: to
@@ -169,13 +191,13 @@ function getScaleFreeOverlayNetwork(nodeCount) {
       var cum = 0;
       var j = 0;
       while (j < connectionCount.length && cum < rand) {
-        cum += connectionCount[j];
+        cum += connectionCount[sp[j]];
         j++;
       }
 
 
-      var from = i;
-      var to = j;
+      var from = sp[i];
+      var to = sp[j];
       edges.push({
         from: from,
         to: to
@@ -183,10 +205,13 @@ function getScaleFreeOverlayNetwork(nodeCount) {
       connectionCount[from]++;
       connectionCount[to]++;
     }
+
+    //console.log(i);
   }
 
   nodes = new vis.DataSet(nodes);
   edges = new vis.DataSet(edges);
 
   return {nodes:nodes, edges:edges};
+
 }
