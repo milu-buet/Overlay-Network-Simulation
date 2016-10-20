@@ -2,6 +2,6 @@
 $(document).ready(function(){
 
 	draw();
+	overlaydraw();
 
-	console.log( "ready!" );
 })

@@ -23,6 +23,9 @@
       // create a network
       var container = document.getElementById('mynetwork');
       var data = getScaleFreeNetwork(nodeCount);
+      nodes = data.nodes
+      edges = data.edges
+
       var options = {
         physics: { stabilization: false },
         manipulation: {
@@ -50,13 +53,20 @@
       network.setOptions({edges:{smooth:{type:'dynamic'}}});
     }
 
+    function getNode(id){
+    	//console.lnetwork.nodes
+    	var newColor = '#7CFC00' ;
+    	//nodes.update([{id:id, color:{background:newColor}}]);
+    	edges.update([{id:'1', color:{color:newColor}}]);
+    }
 
-    function addNode(){
+    function getEdge(node1,node2){
+
+    }
+
+    function showPath(path){
+
 
 
     }
 
-     function removeNode(id){
-
-
-    }
