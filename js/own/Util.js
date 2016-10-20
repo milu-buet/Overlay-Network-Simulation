@@ -164,50 +164,71 @@ function getScaleFreeOverlayNetwork(nodeCount,superpeerCount) {
 
   for(i in sp){
       
-      nodes.push({
-          id: sp[i],
-          label: String(sp[i]),
-          //color:{background:'#7CFC00'},
-          group:'myGroup'
+            nodes.push({
+                id: sp[i],
+                label: String(sp[i]),
+                //color:{background:'#7CFC00'},
+                group:'myGroup'
 
-      });
+            });
 
-      connectionCount[sp[i]] = 0;
+            connectionCount[sp[i]] = 0;
 
-    // create edges in a scale-free-network way
-    if (i == 1) {
-      var from = sp[i];
-      var to = sp[0];
-      edges.push({
-        from: from,
-        to: to
-      });
-      connectionCount[from]++;
-      connectionCount[to]++;
-    }
-    else if (i > 1) {
-      var conn = edges.length * 2;
-      var rand = Math.floor(Math.random() * conn);
-      var cum = 0;
-      var j = 0;
-      while (j < connectionCount.length && cum < rand) {
-        cum += connectionCount[sp[j]];
-        j++;
-      }
+          // create edges in a scale-free-network way
+          if (i == 1) {
+            var from = sp[i];
+            var to = sp[0];
+            edges.push({
+              from: from,
+              to: to
+            });
+            connectionCount[from]++;
+            connectionCount[to]++;
+          }
+          else if (i > 1) {
+            var conn = edges.length * 2;
+            var rand = Math.floor(Math.random() * conn);
+            var cum = 0;
+            var j = 0;
+            while (j < connectionCount.length && cum < rand) {
+              cum += connectionCount[sp[j]];
+              j++;
+            }
 
 
-      var from = sp[i];
-      var to = sp[j];
-      edges.push({
-        from: from,
-        to: to
-      });
-      connectionCount[from]++;
-      connectionCount[to]++;
-    }
-
-    //console.log(i);
+            var from = sp[i];
+            var to = sp[j];
+            edges.push({
+              from: from,
+              to: to
+            });
+            connectionCount[from]++;
+            connectionCount[to]++;
+          }
   }
+
+
+  for (var i = 0; i < nodeCount; i++) {
+    if(sp.indexOf(i) < 0){
+        nodes.push({
+                id: i,
+                label: String(i),
+                color:{background:'#7CFC00'},
+        });
+
+        ri = Math.floor(Math.random() * sp.length);
+        random_super_peer = sp[ri];
+
+         var from = i;
+         var to = random_super_peer;
+         edges.push({
+            from: from,
+            to: to
+        });
+
+    }
+  }
+
 
   nodes = new vis.DataSet(nodes);
   edges = new vis.DataSet(edges);
