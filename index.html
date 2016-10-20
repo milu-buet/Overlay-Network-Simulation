@@ -19,7 +19,7 @@
 <body>
 
 <div id='title_simulation'>
-	<h1>Overlay Neywork Simulation</h1>
+	<h1>Overlay Network Simulation</h1>
 	<p>Md Lutfar Rahman</p>
 	<p>University of Memphis</p>
 	
@@ -41,6 +41,15 @@
 
 <div id='overlay-network-control'>
 	<h3>Overlay Network</h3>
+
+	<p>
+  			Generate a overlay network from the real network.
+	</p>
+	<form onsubmit="overlaydraw(); return false;">
+	  <label for="superpeerCount">Number of Superpeer:</label>
+	  <input id="superpeerCount" type="text" value="5" style="width: 50px;">
+	  <input type="button" value="Show Overlay" onclick="overlaydraw()">
+	</form>
 </div>
 
 

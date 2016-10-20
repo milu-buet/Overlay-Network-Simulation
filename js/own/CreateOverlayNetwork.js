@@ -1,5 +1,5 @@
  
- 	var overlaynodes = null;
+ 	  var overlaynodes = null;
     var overlayedges = null;
     var overlaynetwork = null;
     var overlaysetSmooth = false;

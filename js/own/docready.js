@@ -2,6 +2,12 @@
 $(document).ready(function(){
 
 	draw();
-	overlaydraw();
+	//overlaydraw();
+
+	// $('#show_overlay').click(function(){
+
+	// 		overlaydraw();
+
+	// });
 
 })
