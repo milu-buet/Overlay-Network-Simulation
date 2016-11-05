@@ -41,9 +41,29 @@
       overlaynetwork = new vis.Network(container, data, options);
     }
 
-    function getEdge(from,to){
 
-      //
+    function getOverLayEdge(from,to){
+
+      for(var edge in overlayedges.get()){
+
+          //console.log(edge)
+          var edge_obj = overlayedges.get(edge)
+          //console.log(obj)
+
+          if(edge_obj.from == from && edge_obj.to == to){
+
+
+              return edge_obj.id
+          }
+
+          if(edge_obj.from == to && edge_obj.to == from){
+
+              return edge_obj.id
+          }
+      }
+
+      return -1;
+
     }
 
     function overlayHighlightEdge(id,color){
@@ -61,10 +81,17 @@
 
       for(var i = 0; i < overlay_path.length - 1 ;i++){
 
-        var show_edge = getEdge(overlay_path[i],overlay_path[i+1])
-        overlayHighlightEdge(show_edge,path_color);
+        var show_edge = getOverLayEdge(overlay_path[i],overlay_path[i+1])
+        console.log(show_edge)
+
+        if(show_edge > -1){
+          overlayHighlightEdge(show_edge,path_color);
+        }
+        
 
       }
+
+      console.log('ok');
 
     }
 

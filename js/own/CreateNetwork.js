@@ -56,20 +56,55 @@
       network.setOptions({edges:{smooth:{type:'dynamic'}}});
     }
 
-    function getNode(id){
-    	//console.lnetwork.nodes
-    	var newColor = '#7CFC00' ;
-    	//nodes.update([{id:id, color:{background:newColor}}]);
-    	edges.update([{id:'1', color:{color:newColor}}]);
+    function getEdge(from,to){
+
+      for(var edge in edges.get()){
+
+          edge_obj = edges.get(edge)
+
+
+          if(edge_obj.from == from && edge_obj.to == to){
+
+
+              return edge_obj.id
+          }
+
+          if(edge_obj.from == to && edge_obj.to == from){
+
+              return edge_obj.id
+          }
+      }
+
+      return -1;
+
     }
 
-    function getEdge(node1,node2){
+    function hghlightEdge(id,color){
+
+        edges.update({
+          id:id, 
+          color:{color:color}
+        });
 
     }
 
-    function showPath(path){
+    function Path(path){
 
+      var path_color = '#f44242';
 
+      for(var i = 0; i < path.length - 1 ;i++){
+
+        var show_edge = getEdge(path[i],path[i+1])
+        console.log(show_edge)
+
+        if(show_edge > -1){
+          highlightEdge(show_edge,path_color);
+        }
+        
+
+      }
+
+      console.log('ok');
 
     }
 
