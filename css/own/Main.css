@@ -12,7 +12,7 @@
 
      #real-network-control {
       width: 49%;
-      height: 167px;
+      height: 175px;
       border: 1px solid lightgray;
       float: left;
       padding-left: 8px;
@@ -20,7 +20,7 @@
     
     #overlay-network-control {
       width: 49%;
-      height: 167px;
+      height: 175px;
       border: 1px solid lightgray;
       float: right;
       padding-left: 8px;
