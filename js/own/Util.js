@@ -37,7 +37,9 @@ function getScaleFreeNetwork(nodeCount) {
     if (i == 1) {
       var from = i;
       var to = 0;
+      e_id = edges.length;
       edges.push({
+        id: e_id,
         from: from,
         to: to
       });
@@ -57,7 +59,9 @@ function getScaleFreeNetwork(nodeCount) {
 
       var from = i;
       var to = j;
+      e_id = edges.length;
       edges.push({
+        id: e_id,
         from: from,
         to: to
       });

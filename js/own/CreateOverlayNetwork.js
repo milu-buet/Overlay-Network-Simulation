@@ -45,25 +45,17 @@
     function getOverLayEdge(from,to){
 
       for(var edge in overlayedges.get()){
-
           //console.log(edge)
           var edge_obj = overlayedges.get(edge)
           //console.log(obj)
-
           if(edge_obj.from == from && edge_obj.to == to){
-
-
               return edge_obj.id
           }
-
           if(edge_obj.from == to && edge_obj.to == from){
-
               return edge_obj.id
           }
       }
-
       return -1;
-
     }
 
     function overlayHighlightEdge(id,color){
@@ -87,12 +79,8 @@
         if(show_edge > -1){
           overlayHighlightEdge(show_edge,path_color);
         }
-        
-
       }
-
       console.log('ok');
-
     }
 
   
