@@ -41,20 +41,32 @@
       overlaynetwork = new vis.Network(container, data, options);
     }
 
-    function getNode(id){
-    	//console.lnetwork.nodes
-    	var newColor = '#7CFC00' ;
-    	//nodes.update([{id:id, color:{background:newColor}}]);
-    	edges.update([{id:'1', color:{color:newColor}}]);
+    function getEdge(from,to){
+
+      //
     }
 
-    function getEdge(node1,node2){
+    function overlayHighlightEdge(id,color){
 
-    }
-
-    function showPath(path){
-
-
+        overlayedges.update({
+          id:id, 
+          color:{color:color}
+        });
 
     }
 
+    function overlayPath(overlay_path){
+
+      var path_color = '#f44242';
+
+      for(var i = 0; i < overlay_path.length - 1 ;i++){
+
+        var show_edge = getEdge(overlay_path[i],overlay_path[i+1])
+        overlayHighlightEdge(show_edge,path_color);
+
+      }
+
+    }
+
+  
+  
