@@ -75,7 +75,8 @@
 
         edges.update({
           id:id, 
-          color:{color:color}
+          color:{color:color},
+          width: 5
         });
 
     }
@@ -94,4 +95,34 @@
       }
       console.log('ok');
     }
+
+
+  function getShortestPath(node1,node2){
+
+      var d = new Dijkstras();
+      n = nodes.getIds();
+      e = edges.get();
+      d.setGraphCustom(n,e);
+
+      var p = d.getPath(node1.toString(), node2.toString());
+      p.unshift(node1.toString());
+
+      Path(p);
+
+    }
+
+
+  function realroute(path){
+
+    for(var i =0 ; i < path.length - 1; i++){
+
+        n1 = path[i]
+        n2 = path[i+1]
+        getShortestPath(n1,n2);
+
+    }
+
+
+  }
+
 

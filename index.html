@@ -16,6 +16,8 @@
 
   <script type="text/javascript" src='js/own/docready.js'></script>
 
+   <script type="text/javascript" src = 'js/thirdparty/dijkstra.js' ></script>
+
 </head>
 <body>
 
@@ -51,6 +53,21 @@
 	  <input id="superpeerCount" type="text" value="5" style="width: 50px;">
 	  <input type="button" value="GO" onclick="overlaydraw()">
 	</form>
+
+	<p>
+		Show Overlay routing.
+	</p>
+
+	<form onsubmit="overlayroute(); return false;">
+	  <label for="source">Source</label>
+	  <input id="source" type="text" value="" style="width: 50px;">
+
+	  <label for="destination">Destination</label>
+	  <input id="destination" type="text" value="" style="width: 50px;">
+
+	  <input type="button" value="GO" onclick="overlayroute()">
+	</form>
+
 </div>
 
 

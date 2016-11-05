@@ -62,7 +62,8 @@
 
         overlayedges.update({
           id:id, 
-          color:{color:color}
+          color:{color:color},
+          width: 5
         });
 
     }
@@ -81,6 +82,63 @@
         }
       }
       console.log('ok');
+    }
+
+    function getOverlayShortestPath(node1,node2){
+
+      var d = new Dijkstras();
+      n = overlaynodes.getIds();
+      e = overlayedges.get();
+      d.setGraphCustom(n,e);
+
+      var p = d.getPath(node1.toString(), node2.toString());
+      p.unshift(node1.toString());
+
+      overlayPath(p);
+      realroute(p);
+
+    }
+
+
+    function testm(){
+
+      // var d = new Dijkstras();
+      // d.setGraph(
+      //     [
+      //         ['0', [['1', 20], ['2', 20]] ], 
+      //         ['1', [['0', 30], ['2', 100]] ], 
+      //         ['2', [['3', 10], ['0', 20]] ], 
+      //         ['3', [['2', 10], ['1', 20]] ]
+      //     ]
+      // );
+      // var path = d.getPath('1', '3');
+
+
+      var d = new Dijkstras();
+      var n = overlaynodes.getIds();
+      var e = overlayedges.get();
+
+      // n = [0,1,2,3]
+      // e = [
+
+      // {from:0, to:1},
+      // {from:0, to:2},
+      // {from:1, to:0},
+      // {from:1, to:2},
+      // {from:2, to:3},
+      // {from:2, to:0},
+      // {from:3, to:2},
+      // {from:3, to:1},
+      
+      // ]
+
+      d.setGraphCustom(n,e);
+
+      var p = d.getPath('1', '3');
+
+      return p;
+
+
     }
 
   
