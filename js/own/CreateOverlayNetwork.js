@@ -3,6 +3,7 @@
     var overlayedges = null;
     var overlaynetwork = null;
     var overlaysetSmooth = false;
+    var sequentialEdgesToAnimate = []
 
     function overlaydestroy() {
       if (overlaynetwork !== null) {
@@ -41,9 +42,9 @@
       overlaynetwork = new vis.Network(container, data, options);
     }
 
-
+    var last_dir_backward = false;
     function getOverLayEdge(from,to){
-
+      last_dir_backward = false;
       for(var edge in overlayedges.get()){
           //console.log(edge)
           var edge_obj = overlayedges.get(edge)
@@ -52,6 +53,7 @@
               return edge_obj.id
           }
           if(edge_obj.from == to && edge_obj.to == from){
+            last_dir_backward = true;
               return edge_obj.id
           }
       }
@@ -75,7 +77,13 @@
       for(var i = 0; i < overlay_path.length - 1 ;i++){
 
         var show_edge = getOverLayEdge(overlay_path[i],overlay_path[i+1])
-        console.log(show_edge)
+        //console.log(show_edge)
+        //isBackward: true
+
+        var anim_obj = { edge: show_edge,trafficSize:8};
+        anim_obj.isBackward = last_dir_backward;
+
+        sequentialEdgesToAnimate.push(anim_obj);
 
         if(show_edge > -1){
           overlayHighlightEdge(show_edge,path_color);
@@ -96,50 +104,47 @@
 
       overlayPath(p);
       realroute(p);
+      animate(0);
 
     }
 
 
-    function testm(){
+    // function testm(){
 
-      // var d = new Dijkstras();
-      // d.setGraph(
-      //     [
-      //         ['0', [['1', 20], ['2', 20]] ], 
-      //         ['1', [['0', 30], ['2', 100]] ], 
-      //         ['2', [['3', 10], ['0', 20]] ], 
-      //         ['3', [['2', 10], ['1', 20]] ]
-      //     ]
-      // );
-      // var path = d.getPath('1', '3');
+    //   animate(0);
+
+    // }
 
 
-      var d = new Dijkstras();
-      var n = overlaynodes.getIds();
-      var e = overlayedges.get();
-
-      // n = [0,1,2,3]
-      // e = [
-
-      // {from:0, to:1},
-      // {from:0, to:2},
-      // {from:1, to:0},
-      // {from:1, to:2},
-      // {from:2, to:3},
-      // {from:2, to:0},
-      // {from:3, to:2},
-      // {from:3, to:1},
-      
-      // ]
-
-      d.setGraphCustom(n,e);
-
-      var p = d.getPath('1', '3');
-
-      return p;
+// var sequentialEdgesToAnimate = [
+//        // forward sequence
+//        {edge:1, trafficSize:4}
+// ];
 
 
-    }
+function animate(startingEdgeNum) {
+   
+    overlaynetwork.animateTraffic(
+                        /* first edge to start animating */
+                        sequentialEdgesToAnimate [startingEdgeNum] ,
+
+                        /* onPreAnimationHandler*/
+                        null, 
+
+                        /*onPreAnimateFrameHandler*/
+                        null , 
+
+                       /*onPostAnimateFrameHandler*/ 
+                        null ,
+                        
+                        /* onPostAnimationHandler */
+                        function(edgesTrafficList) { 
+                              if (++ startingEdgeNum < sequentialEdgesToAnimate.length) {
+                                   animate(startingEdgeNum); 
+                              }
+                       }
+    );
+}
 
   
   
