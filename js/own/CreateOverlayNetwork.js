@@ -1,4 +1,4 @@
- 
+
  	  var overlaynodes = null;
     var overlayedges = null;
     var overlaynetwork = null;
@@ -24,6 +24,8 @@
       overlaynodes = data.nodes
       overlayedges = data.edges
 
+      var edgeCount = overlayedges.get().length;
+
       var options = {
         physics: { stabilization: false },
         manipulation: {
@@ -33,7 +35,12 @@
         			nodeCount++
         			callback(nodeData);
       		},
-      		deleteNode: true
+      		deleteNode: true,
+          addEdge: function(edgeData,callback) {
+                
+            edgeData.id = edgeCount++;
+            callback(edgeData);
+          }
   		  },
         groups: {
             myGroup: {color:{background:'red'}, borderWidth:3}
