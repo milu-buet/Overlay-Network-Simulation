@@ -73,6 +73,7 @@
     function overlayPath(overlay_path){
 
       var path_color = '#f44242';
+      sequentialEdgesToAnimate = [];
 
       for(var i = 0; i < overlay_path.length - 1 ;i++){
 
@@ -103,8 +104,9 @@
       p.unshift(node1.toString());
 
       overlayPath(p);
-      realroute(p);
       animate(0);
+      realroute(p);
+      
 
     }
 

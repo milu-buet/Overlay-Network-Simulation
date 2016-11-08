@@ -3,6 +3,7 @@
     var edges = null;
     var network = null;
     var setSmooth = false;
+      var sequentialEdgesToAnimateR = [];
 
     function destroy() {
       if (network !== null) {
@@ -55,9 +56,9 @@
       document.getElementById("message").innerHTML = '<a onclick="disableSmoothCurves()">You may want to disable dynamic smooth curves for better performance with a large amount of nodes and edges. Click here to disable them.</a>';
       network.setOptions({edges:{smooth:{type:'dynamic'}}});
     }
-
+    var last_dir_backward = false;
     function getEdge(from,to){
-
+      last_dir_backward = false;
       for(var edge in edges.get()){
         //console.log(typeof(edge));
         edge_obj = edges.get()[edge]
@@ -65,6 +66,7 @@
               return edge_obj.id
           }
           if(edge_obj.from == to && edge_obj.to == from){
+            last_dir_backward = true;
               return edge_obj.id
           }
       }
@@ -82,12 +84,17 @@
     }
 
     function Path(path){
-
+      
       var path_color = '#f44242';
       for(var i = 0; i < path.length - 1 ;i++){
 
         var show_edge = getEdge(path[i],path[i+1])
         console.log(show_edge)
+
+        var anim_obj = { edge: show_edge,trafficSize:8};
+        anim_obj.isBackward = last_dir_backward;
+
+        sequentialEdgesToAnimateR.push(anim_obj);
 
         if(show_edge > -1){
           hghlightEdge(show_edge,path_color);
@@ -113,7 +120,7 @@
 
 
   function realroute(path){
-
+    sequentialEdgesToAnimateR = [] ;
     for(var i =0 ; i < path.length - 1; i++){
 
         n1 = path[i]
@@ -121,8 +128,33 @@
         getShortestPath(n1,n2);
 
     }
-
-
+    animateR(0);
   }
+
+
+
+  function animateR(startingEdgeNum) {
+   
+    network.animateTraffic(
+                        /* first edge to start animating */
+                        sequentialEdgesToAnimateR [startingEdgeNum] ,
+
+                        /* onPreAnimationHandler*/
+                        null, 
+
+                        /*onPreAnimateFrameHandler*/
+                        null , 
+
+                       /*onPostAnimateFrameHandler*/ 
+                        null ,
+                        
+                        /* onPostAnimationHandler */
+                        function(edgesTrafficList) { 
+                              if (++ startingEdgeNum < sequentialEdgesToAnimateR.length) {
+                                   animateR(startingEdgeNum); 
+                              }
+                       }
+    );
+}
 
 

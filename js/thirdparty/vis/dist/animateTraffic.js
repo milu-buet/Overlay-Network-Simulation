@@ -75,6 +75,9 @@ vis.Network.prototype.animateTraffic =
                     ;
             }
             else {
+
+            	//console.log("Edge >>>> where?");
+            	//console.log(edgeTraffic);
                 edge = this.thisNetwork.body.edges[edgeTraffic];
             }
             
