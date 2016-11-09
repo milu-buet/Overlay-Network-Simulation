@@ -27,6 +27,8 @@
       rnodes = nodes = data.nodes
       redges = edges = data.edges
 
+       var edgeCount = edges.get().length;
+
       var options = {
         physics: { stabilization: false },
         manipulation: {
@@ -36,7 +38,12 @@
         			nodeCount++
         			callback(nodeData);
       		},
-      		deleteNode: true
+      		deleteNode: true,
+          addEdge: function(edgeData,callback) {
+                
+            edgeData.id = edgeCount++;
+            callback(edgeData);
+          }
   		  },
         groups: {
             myGroup: {color:{background:'red'}, borderWidth:3}
