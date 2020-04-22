@@ -33,13 +33,13 @@
 
 	<h3>Real Network</h3>
 	<p>
-  			Generate a random network with nodes and edges.
+  			<b> Step 1 </b>: Generate a random network with nodes and edges.
 	</p>
 
 	<form onsubmit="draw(); return false;">
 	  <label for="nodeCount">Number of nodes:</label>
 	  <input id="nodeCount" type="text" value="25" style="width: 50px;">
-	  <input type="button" value="Go" onclick="draw()">
+	  <input type="button" value="Go" onclick="draw()"> 
 	</form>
 </div>
 
@@ -47,34 +47,37 @@
 	<h3>Overlay Network</h3>
 
 	<p>
-  			Generate a overlay network from the real network.
+  			<b> Step 2 </b>: Generate a overlay network from the real network.
 	</p>
 	<form onsubmit="overlaydraw(); return false;">
 	  <label for="superpeerCount">Number of super peers:</label>
 	  <input id="superpeerCount" type="text" value="5" style="width: 50px;">
-	  <input type="button" value="GO" onclick="overlaydraw()">
+	  <input type="button" value="GO" onclick="overlaydraw()"> 
 	</form>
 
 	<p>
-		Show Overlay routing.
+		<b> Step 3 </b>: Show Overlay routing.
 	</p>
 
 	<form onsubmit="overlayroute(); return false;">
 	  <label for="source">Source</label>
-	  <input id="source" type="text" value="" style="width: 50px;">
+	  <input id="source" type="text" value="1" style="width: 50px;">
 
 	  <label for="destination">Destination</label>
-	  <input id="destination" type="text" value="" style="width: 50px;">
+	  <input id="destination" type="text" value="2" style="width: 50px;">
 
-	  <input type="button" value="GO" onclick="overlayroute()">
+	  <input type="button" value="GO" onclick="overlayroute()"> 
 	</form>
 
 </div>
 
 
+
 <span id="message"></span>
 <div id="mynetwork"></div>
 <div id="overlaynetwork"></div>
+
+Note: This is a simulation of overlay network on top of a real network. It shows shortest path between two nodes in terms of overlay network. Then shows how this shortest path might not be the shortest path for the real network. The real world network is not aware of the virtual overlay network or vice versa.
 
 </body>
 </html>
